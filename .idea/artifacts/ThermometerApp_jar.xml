@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ThermometerApp:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ThermometerApp_jar</output-path>
+    <root id="archive" name="ThermometerApp.jar">
+      <element id="module-output" name="ThermometerApp" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/sun/mail/javax.mail/1.6.2/javax.mail-1.6.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/mongodb/mongo-java-driver/3.12.7/mongo-java-driver-3.12.7.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
