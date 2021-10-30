@@ -56,7 +56,8 @@ public class MailSender {
         message.setText(text);
 
         Transport.send(message);
-      } catch (MessagingException mex) {
+      }
+      catch (Exception mex) {
         mex.printStackTrace();
       }
       sendThreshold.setTime(now.getTime() + WAIT_TIME);

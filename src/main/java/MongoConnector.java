@@ -33,9 +33,8 @@ public class MongoConnector {
     try {
       collection.insertOne(document);
     }
-    catch (MongoWriteException error) {
+    catch (Exception error) {
       error.printStackTrace();
-      return;
     }
 
   }
