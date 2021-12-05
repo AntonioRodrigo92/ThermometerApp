@@ -27,7 +27,8 @@ public class MongoConnector {
 
     document.put("temperature", reading.getTemp());
     document.put("humidity", reading.getHum());
-    document.put("timestamp", addHours(reading.getTimestamp(), 1));
+//    document.put("timestamp", addHours(reading.getTimestamp(), 1));
+    document.put("timestamp", reading.getTimestamp());
 
     //    TODO - testar funcionamento do error handling
     try {

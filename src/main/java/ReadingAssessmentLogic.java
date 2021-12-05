@@ -80,7 +80,7 @@ public class ReadingAssessmentLogic {
 		else {
 			outOfBoundsReadingsHum++;
 			if (outOfBoundsReadingsHum == Integer.parseInt(userInput.getUserInputMap().get("MAX_OUT_OF_BOUNDS_READINGS"))) {
-				mailSender.sendMail("Warning: Humidity", "Warning, the humidity levels are out of bounds");
+				mailSender.sendMail("Warning: Humidity", "Warning, the humidity levels are out of bounds: " + r + "%.");
 			}
 		}
 	}
@@ -92,7 +92,7 @@ public class ReadingAssessmentLogic {
 		else {
 			outOfBoundsReadingsTemp++;
 			if (outOfBoundsReadingsTemp == Integer.parseInt(userInput.getUserInputMap().get("MAX_OUT_OF_BOUNDS_READINGS"))) {
-				mailSender.sendMail("Warning: Temperature", "Warning, the temperature levels are out of bounds");
+				mailSender.sendMail("Warning: Temperature", "Warning, the temperature levels are out of bounds: " + r + "ºC.");
 			}
 		}
 	}
