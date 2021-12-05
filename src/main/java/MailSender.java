@@ -64,9 +64,4 @@ public class MailSender {
     }
   }
 
-//  public static void main(String[] args) {
-//    MailSender sender = new MailSender("kubikopousada@gmail.com", "olho_zeca", "antoniorodrigo92@gmail.com");
-//    sender.sendMail("isto é um teste 2", "teste de corpo, lol! 2");
-//  }
-
 }
