@@ -21,11 +21,13 @@ public class IOOperation {
 		
 		if (valid.equals("Success")) {
 			//sucesso
+			System.out.println(Utils.getCurrentDateTime() + "Reading successful");
 			try {
 				float temp = Float.parseFloat(stdInput.readLine());
 				int hum = Integer.parseInt(stdInput.readLine());
 				Timestamp timestamp = Timestamp.from(Instant.now());
 				if (temp > 100 || hum > 100 || hum < 0) {
+					System.out.println(Utils.getCurrentDateTime() + "Invalid Reading");
 					BLEReading reading = new BLEReading(false, 0.0f, 0, null);
 					return reading;
 				}
@@ -33,36 +35,32 @@ public class IOOperation {
 				return reading;
 			}
 			catch (NumberFormatException e) {
+				System.out.println(Utils.getCurrentDateTime() + "Invalid Reading - inside catch");
 				BLEReading reading = new BLEReading(false, 0.0f, 0, null);
 				return reading;
 			}
 		}
 		else {
 			//leitura errada
+			System.out.println(Utils.getCurrentDateTime() + "Reading NOT successful");
 			BLEReading reading = new BLEReading(false, 0.0f, 0, null);
 			return reading;
 		}	
 	}
 	
-	public static Map<String, String> userInput(String fileLocation) {
+	public static Map<String, String> userInput(String fileLocation) throws FileNotFoundException {
 		Map<String, String> map = new HashMap<>();
 		File f = new File(fileLocation);
 	    
-		try {
-	    	Scanner sc = new Scanner(f);
-	    	
-	    	while (sc.hasNextLine()) {
-	    		String line = sc.nextLine();
-	    		if(! line.equals("")) {
-						populateObject(line, map);
-					}
-	    	}
-	    	sc.close();
-	    } 
-	    catch (FileNotFoundException e) {
-	    	e.printStackTrace();
-	    }
-		
+		Scanner sc = new Scanner(f);
+
+		while (sc.hasNextLine()) {
+			String line = sc.nextLine();
+			if(! line.equals("")) {
+					populateObject(line, map);
+				}
+		}
+		sc.close();
 		return map;
 	}
 	
