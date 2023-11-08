@@ -22,19 +22,26 @@ public class MongoConnector {
     collection = database.getCollection(collectionName);
   }
 
-  public void insertReading(BLEReading reading) {
+  public void insertReading(BLEReading reading, boolean extraHour) {
     Document document = new Document();
 
     document.put("temperature", reading.getTemp());
     document.put("humidity", reading.getHum());
-    document.put("timestamp", addHours(reading.getTimestamp(), 1));
-//    document.put("timestamp", reading.getTimestamp());
+    if(extraHour) {
+      document.put("timestamp", Utils.addHours(reading.getTimestamp(), 1));
+    }
+    else {
+      document.put("timestamp", reading.getTimestamp());
+    }
 
     //    TODO - testar funcionamento do error handling
     try {
+      System.out.println(Utils.getCurrentDateTime() + "Inserting Reading into MongoDB");
       collection.insertOne(document);
+      System.out.println(Utils.getCurrentDateTime() + "Inserted Reading with success");
     }
     catch (Exception error) {
+      System.out.println(Utils.getCurrentDateTime() + "ERROR while inserting into MongoDB");
       error.printStackTrace();
     }
     finally {
@@ -43,38 +50,5 @@ public class MongoConnector {
 
   }
 
-  public void insertDocument(Document doc) {
-    collection.insertOne(doc);
-  }
-
-  private void printInsertion(BLEReading reading) {
-    System.out.println("tempearture: " + reading.getTemp());
-    System.out.println("humidity: " + reading.getHum());
-    System.out.println("timestamp: " + reading.getTimestamp());
-  }
-
-  private static Timestamp addHours(Timestamp ts, int hours) {
-    Calendar cal = Calendar.getInstance();
-    cal.setTimeInMillis(ts.getTime());
-    cal.add(Calendar.HOUR, hours);
-    Timestamp nts = new Timestamp(cal.getTime().getTime());
-
-    return nts;
-  }
-
-  public void deleteAllReadings() {
-    collection.deleteMany(new Document());
-  }
-
-  public void printAllReadings() {
-    MongoCursor<Document> cursor = collection.find().iterator();
-    while (cursor.hasNext()) {
-      System.out.println(cursor.next());
-    }
-  }
-
-  public MongoCursor<Document> getCollectionAsCursor() {
-    return collection.find().iterator();
-  }
 
 }
