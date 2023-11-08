@@ -38,8 +38,10 @@ public class MongoConnector {
     try {
       System.out.println(Utils.getCurrentDateTime() + "Inserting Reading into MongoDB");
       collection.insertOne(document);
+      System.out.println(Utils.getCurrentDateTime() + "Inserted Reading with success");
     }
     catch (Exception error) {
+      System.out.println(Utils.getCurrentDateTime() + "ERROR while inserting into MongoDB");
       error.printStackTrace();
     }
     finally {
@@ -48,30 +50,5 @@ public class MongoConnector {
 
   }
 
-//  public void insertDocument(Document doc) {
-//    collection.insertOne(doc);
-//  }
-
-//  private void printInsertion(BLEReading reading) {
-//    System.out.println("tempearture: " + reading.getTemp());
-//    System.out.println("humidity: " + reading.getHum());
-//    System.out.println("timestamp: " + reading.getTimestamp());
-//  }
-
-
-//  public void deleteAllReadings() {
-//    collection.deleteMany(new Document());
-//  }
-
-//  public void printAllReadings() {
-//    MongoCursor<Document> cursor = collection.find().iterator();
-//    while (cursor.hasNext()) {
-//      System.out.println(cursor.next());
-//    }
-//  }
-
-//  public MongoCursor<Document> getCollectionAsCursor() {
-//    return collection.find().iterator();
-//  }
 
 }

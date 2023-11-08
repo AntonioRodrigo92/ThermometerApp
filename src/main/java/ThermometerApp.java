@@ -28,12 +28,13 @@ public class ThermometerApp {
 				BLEReading reading = IOOperation.getReading(scriptPath, userInput.getUserInputMap().get("THERMOMETER_ADDR"));
 				assessmentLogic.readingLogic(reading, Boolean.parseBoolean(userInput.getUserInputMap().get("EXTRA_HOUR")));
 			} catch (IOException e) {
-
+				System.out.println(Utils.getCurrentDateTime() + "IOException in readingLoop");
 				e.printStackTrace();
 			}
 			try {
 				Thread.sleep(30000);
 			} catch (InterruptedException e) {
+				System.out.println(Utils.getCurrentDateTime() + "InterruptedException in readingLoop");
 				e.printStackTrace();
 			}
 		}
