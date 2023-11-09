@@ -21,23 +21,31 @@ public class ReadingAssessmentLogic {
 
 	public void readingLogic(BLEReading reading, boolean extraHour) {
 
-		if (reading.getTimestamp().before(threshold)) {
-			counter++;
-			totalTemp += reading.getTemp();
-			totalHum += reading.getHum();
+		try {
+			if (reading.getTimestamp().before(threshold)) {
+				counter++;
+				totalTemp += reading.getTemp();
+				totalHum += reading.getHum();
+			}
+
+			else {
+				float meanTemp = totalTemp / counter;
+				int meanHum = (int) (totalHum / counter);
+				BLEReading meanReading = new BLEReading(true, meanTemp, meanHum, threshold);
+				mongoConnector.insertReading(meanReading, extraHour);
+
+				setTimeThreshold(threshold);
+				counter = 0;
+				totalTemp = 0;
+				totalHum = 0;
+			}
+		}
+		catch (Exception e) {
+			System.out.println("### " + Utils.getCurrentDateTime() + "Generic exception in reading logic");
+			e.printStackTrace();
 		}
 
-		else {
-			float meanTemp = totalTemp / counter;
-			int meanHum = (int) (totalHum / counter);
-			BLEReading meanReading = new BLEReading(true, meanTemp, meanHum, threshold);
-			mongoConnector.insertReading(meanReading, extraHour);
 
-			setTimeThreshold(threshold);
-			counter = 0;
-			totalTemp = 0;
-			totalHum = 0;
-		}
 	}
 
 
