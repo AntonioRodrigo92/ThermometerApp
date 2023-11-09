@@ -36,12 +36,12 @@ public class MongoConnector {
 
     //    TODO - testar funcionamento do error handling
     try {
-      System.out.println(Utils.getCurrentDateTime() + "Inserting Reading into MongoDB");
+      System.out.println("### " + Utils.getCurrentDateTime() + "Inserting Reading into MongoDB");
       collection.insertOne(document);
-      System.out.println(Utils.getCurrentDateTime() + "Inserted Reading with success");
+      System.out.println("### " + Utils.getCurrentDateTime() + "Inserted Reading with success");
     }
     catch (Exception error) {
-      System.out.println(Utils.getCurrentDateTime() + "ERROR while inserting into MongoDB");
+      System.out.println("### " + Utils.getCurrentDateTime() + "ERROR while inserting into MongoDB");
       error.printStackTrace();
     }
     finally {
