@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Calendar;
@@ -19,7 +20,7 @@ public class ReadingAssessmentLogic {
 	}
 
 
-	public void readingLogic(BLEReading reading, boolean extraHour) {
+	public void readingLogic(BLEReading reading, boolean extraHour, String restartPath) {
 
 		try {
 			if (reading.getTimestamp().before(threshold)) {
@@ -43,6 +44,16 @@ public class ReadingAssessmentLogic {
 		catch (Exception e) {
 			System.out.println("### " + Utils.getCurrentDateTime() + "Generic exception in reading logic");
 			e.printStackTrace();
+			try {
+				System.out.println("### " + Utils.getCurrentDateTime() + "Restart Bluetooth");
+				IOOperation.restartBluetooth(restartPath);
+				System.out.println("### " + Utils.getCurrentDateTime() + "Sleeping for 15 min");
+				Thread.sleep(900000);
+			} catch (InterruptedException interruptedException) {
+				interruptedException.printStackTrace();
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+			}
 		}
 
 

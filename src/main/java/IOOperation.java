@@ -63,6 +63,12 @@ public class IOOperation {
 		sc.close();
 		return map;
 	}
+
+	public static void restartBluetooth(String scriptPath) throws IOException {
+		Runtime rt = Runtime.getRuntime();
+		String[] commands = {scriptPath};
+		Process proc = rt.exec(commands);
+	}
 	
     private static void populateObject (String line, Map<String, String> map) {
         String[] part = line.split(": ");

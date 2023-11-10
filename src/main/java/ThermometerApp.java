@@ -22,11 +22,12 @@ public class ThermometerApp {
 	private void readingLoop() {
 		System.out.println("### " + Utils.getCurrentDateTime() + "Starting reading loop");
 		String scriptPath = userInput.getUserInputMap().get("SCRIPT_PATH");
+		String restartPath = userInput.getUserInputMap().get("RESTART_BT_PATH");
 		while(true) {
 			try {
 				System.out.println("### " + Utils.getCurrentDateTime() + "getting BT reading");
 				BLEReading reading = IOOperation.getReading(scriptPath, userInput.getUserInputMap().get("THERMOMETER_ADDR"));
-				assessmentLogic.readingLogic(reading, Boolean.parseBoolean(userInput.getUserInputMap().get("EXTRA_HOUR")));
+				assessmentLogic.readingLogic(reading, Boolean.parseBoolean(userInput.getUserInputMap().get("EXTRA_HOUR")), restartPath);
 			} catch (IOException e) {
 				System.out.println("### " + Utils.getCurrentDateTime() + "IOException in readingLoop");
 				e.printStackTrace();
