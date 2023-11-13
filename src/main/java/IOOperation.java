@@ -35,7 +35,7 @@ public class IOOperation {
 				return reading;
 			}
 			catch (NumberFormatException e) {
-				System.out.println("### " + Utils.getCurrentDateTime() + "Invalid Reading - inside catch");
+				System.err.println("### " + Utils.getCurrentDateTime() + "Invalid Reading - inside catch");
 				BLEReading reading = new BLEReading(false, 0.0f, 0, null);
 				return reading;
 			}

@@ -42,12 +42,12 @@ public class ReadingAssessmentLogic {
 			}
 		}
 		catch (Exception e) {
-			System.out.println("### " + Utils.getCurrentDateTime() + "Generic exception in reading logic");
+			System.err.println("### " + Utils.getCurrentDateTime() + "Generic exception in reading logic");
 			e.printStackTrace();
 			try {
-				System.out.println("### " + Utils.getCurrentDateTime() + "Restart Bluetooth");
+				System.err.println("### " + Utils.getCurrentDateTime() + "Restart Bluetooth");
 				IOOperation.restartBluetooth(restartPath);
-				System.out.println("### " + Utils.getCurrentDateTime() + "Sleeping for 15 min");
+				System.err.println("### " + Utils.getCurrentDateTime() + "Sleeping for 15 min");
 				Thread.sleep(900000);
 			} catch (InterruptedException interruptedException) {
 				interruptedException.printStackTrace();

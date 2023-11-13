@@ -41,7 +41,7 @@ public class MongoConnector {
       System.out.println("### " + Utils.getCurrentDateTime() + "Inserted Reading with success");
     }
     catch (Exception error) {
-      System.out.println("### " + Utils.getCurrentDateTime() + "ERROR while inserting into MongoDB");
+      System.err.println("### " + Utils.getCurrentDateTime() + "ERROR while inserting into MongoDB");
       error.printStackTrace();
     }
     finally {

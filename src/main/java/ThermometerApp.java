@@ -23,19 +23,21 @@ public class ThermometerApp {
 		System.out.println("### " + Utils.getCurrentDateTime() + "Starting reading loop");
 		String scriptPath = userInput.getUserInputMap().get("SCRIPT_PATH");
 		String restartPath = userInput.getUserInputMap().get("RESTART_BT_PATH");
+		String thermometerAddress = userInput.getUserInputMap().get("THERMOMETER_ADDR");
+		String extraHour = userInput.getUserInputMap().get("EXTRA_HOUR");
 		while(true) {
 			try {
 				System.out.println("### " + Utils.getCurrentDateTime() + "getting BT reading");
-				BLEReading reading = IOOperation.getReading(scriptPath, userInput.getUserInputMap().get("THERMOMETER_ADDR"));
-				assessmentLogic.readingLogic(reading, Boolean.parseBoolean(userInput.getUserInputMap().get("EXTRA_HOUR")), restartPath);
+				BLEReading reading = IOOperation.getReading(scriptPath, thermometerAddress);
+				assessmentLogic.readingLogic(reading, Boolean.parseBoolean(extraHour), restartPath);
 			} catch (IOException e) {
-				System.out.println("### " + Utils.getCurrentDateTime() + "IOException in readingLoop");
+				System.err.println("### " + Utils.getCurrentDateTime() + "IOException in readingLoop");
 				e.printStackTrace();
 			}
 			try {
 				Thread.sleep(30000);
 			} catch (InterruptedException e) {
-				System.out.println("### " + Utils.getCurrentDateTime() + "InterruptedException in readingLoop");
+				System.err.println("### " + Utils.getCurrentDateTime() + "InterruptedException in readingLoop");
 				e.printStackTrace();
 			}
 		}
@@ -53,7 +55,7 @@ public class ThermometerApp {
 		try {
 			m = new ThermometerApp(user_input_path);
 		} catch (FileNotFoundException e) {
-			System.out.println("### " + Utils.getCurrentDateTime() + "Error during ThermometerApp creation");
+			System.err.println("### " + Utils.getCurrentDateTime() + "Error during ThermometerApp creation");
 			e.printStackTrace();
 		}
 		m.readingLoop();
